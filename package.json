@@ -1,0 +1,25 @@
+{
+  "name": "@brightcove/player-loader-webpack-plugin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "predemo": "rm -f ./demo/dist.js",
+    "demo": "webpack --config ./demo/webpack.config.js",
+    "postdemo": "npm run demoserver",
+    "demoserver": "http-server demo -p 9999"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@brightcove/player-loader": "^1.0.0",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
+    "webpack": "^4.16.2"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "webpack-cli": "^3.1.0"
+  }
+}

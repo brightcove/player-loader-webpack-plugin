@@ -6,19 +6,19 @@ const PlayerLoader = require('@brightcove/player-loader');
 const defaults = {
   embedId: 'default',
   playerId: 'default',
-  baseUrl: 'https://players.brightcove.net/',
 };
 
 class PlayerLoaderPlugin {
   constructor(options) {
     const settings = Object.assign({}, defaults, options);
-    const {accountId, embedId, playerId, baseUrl} = settings;
+    const {accountId, embedId, playerId} = settings;
 
-    if (!accountId || !embedId || !playerId || !baseUrl) {
-      throw new Error('accountId is required and playerId/embedId/baseurl must be set to a value!')
+    if (!accountId || !embedId || !playerId) {
+      throw new Error('accountId is required and playerId/embedId must be set to a value!')
     }
 
     const url = PlayerLoader.getUrl(settings);
+
     this.playerPromise = request.get(url).catch(function(err) {
       throw new Error('Failed to get ' + url, err);
     });

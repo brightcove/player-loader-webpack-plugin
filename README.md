@@ -57,9 +57,3 @@ The Brightcove Player [embed ID](https://support.brightcove.com/guide-embed-apis
 * *Default:* `'default'`
 
 A Brightcove Player ID.
-
-### `baseUrl`
-* *Type:* `string`
-* *Default:* `'https://players.brightcove.net/'`
-
-By default, the base URL used is the Brightcove CDN. However, for some non-production cases and testing, you may want to override the base URL. This can be achieved via a call to the `setBaseUrl` function:

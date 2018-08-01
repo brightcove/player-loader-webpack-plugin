@@ -29,14 +29,13 @@ Then create an instance of the `PlayerLoader` plugin in the `plugins` array of y
 For more information on options see the options section of the README.
 
 ## Running the demo
-Do the following
+To run the demo, do the following
 1. Clone the repo: `git clone https://github.com/brightcove/player-loader-webpack-plugin`
 2. Move into the directory: `cd player-loader-webpack-plugin`
 3. Install dependencies: `npm i`
-4. change the `accountId` option in `demo/webpack.config.js` to something valid
-5. Run the demo: `npm run demo`
+4. Run the demo: `npm run demo -- ACCOUNT_ID` where `ACCOUNT_ID` is a valid account id: `123456789`
+5. If everything succeeds, wait for the web server to start then
 6. Open `http://localhost:9999` in the browser to view the demo
-
 
 ## Available Options
 

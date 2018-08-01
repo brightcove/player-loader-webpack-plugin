@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "predemo": "rm -f ./demo/dist.js",
-    "demo": "webpack --config ./demo/webpack.config.js",
+    "demo": "webpack --config ./demo/webpack.config.js -- ",
     "postdemo": "npm run demoserver",
     "demoserver": "http-server demo -p 9999"
   },

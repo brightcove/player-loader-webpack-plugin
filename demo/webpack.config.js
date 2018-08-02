@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const path = require('path');
 const PlayerLoader = require('../src/index.js');
 
@@ -8,7 +9,7 @@ if (process.argv[5]) {
 }
 
 if (!accountId) {
-  console.error('Please pass a valid accountId to this command. ex: `npm run demo -- 123456789`')
+  console.error('Please pass a valid accountId to this command. ex: `npm run demo -- 123456789`');
   console.error();
   process.exit(1);
 }
@@ -19,8 +20,8 @@ module.exports = {
     filename: 'dist.js',
     path: path.resolve(__dirname)
   },
-  mode: "development",
+  mode: 'development',
   plugins: [
     new PlayerLoader({accountId})
-  ],
+  ]
 };

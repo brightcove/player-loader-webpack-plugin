@@ -5,10 +5,13 @@
   "main": "src/index.js",
   "scripts": {
     "version": "node scripts/version.js",
+    "lint": "vjsstandard",
     "predemo": "rm -f ./demo/dist.js",
     "demo": "webpack --config ./demo/webpack.config.js -- ",
     "postdemo": "npm run demoserver",
-    "demoserver": "http-server demo -p 9999"
+    "demoserver": "http-server demo -p 9999",
+    "preversion": "npm run lint",
+    "prepush": "npm run lint"
   },
   "keywords": [],
   "author": "",
@@ -17,12 +20,14 @@
     "@brightcove/player-loader": "^1.1.0",
     "request": "^2.87.0",
     "request-promise": "^4.2.2",
+    "videojs-standard": "^6.0.4",
     "webpack": "^4.16.2"
   },
   "devDependencies": {
     "conventional-changelog-cli": "^2.0.1",
     "conventional-changelog-videojs": "^3.0.0",
     "http-server": "^0.11.1",
+    "husky": "^0.14.3",
     "semver": "^5.5.0",
     "webpack-cli": "^3.1.0"
   }

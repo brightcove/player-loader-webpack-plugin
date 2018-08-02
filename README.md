@@ -94,6 +94,35 @@ The return value is an instance of a `videojs` [`Player`](https://docs.videojs.c
 ### Setting a source
 If the player you bundled is configured in studio, or the video element you intialized had a source then the player should be ready to go. If your player does not have a source you can add one using `player.src({src: 'some-url.mp4', type: 'video/mp4'})`.
 
+### Putting it all (Example)
+1. Setup the plugin with webpack for the player that you want.
+2. Make sure there are no video elements that will auto-setup on the html page you are going to test with, unless you want that. See the auto-setup section for more info on that.
+3. Setup the player in your webpack entry point (or anywhere really)
+
+```js
+import window from 'global/window';
+import document from 'global/document';
+
+// get the bc function which will be on window at this point
+const bc = window.bc;
+
+// create a video element
+const videoElement = document.createElement('video');
+
+// add it to the body of the page
+document.body.appendChild(videoElement);
+
+// make that video element into brightcove player
+const player = bc(videoElement);
+
+// set the source for that video
+// or do basically anything you want here
+
+player.src({src: 'some-url.mp4', type: 'video/mp4'});
+
+```
+
+
 ## More Resources
 * [Brightcove Guides](https://support.brightcove.com/getting-started-brightcove-player)
 * [API docs](https://docs.brightcove.com/brightcove-player/current-release/index.html)

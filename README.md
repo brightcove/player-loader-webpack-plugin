@@ -100,10 +100,10 @@ If the player you bundled is configured in studio, or the video element you inti
 3. Setup the player in your webpack entry point (or anywhere really)
 
 ```js
-import window from 'global/window';
-import document from 'global/document';
-
 // get the bc function which will be on window at this point
+// Note that if you need your code to support node you will
+// want to use something like the `global` package on npm
+// to "import" window for nodejs.
 const bc = window.bc;
 
 // create a video element

@@ -1,7 +1,7 @@
 {
   "name": "@brightcove/player-loader-webpack-plugin",
   "version": "1.0.0",
-  "description": "",
+  "description": "The official webpack plugin for the Brightcove Player.",
   "main": "src/index.js",
   "scripts": {
     "version": "node scripts/version.js",
@@ -14,16 +14,19 @@
     "prepush": "npm run lint"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Brandon Casey",
+    "email": "branonocasey@gmail.com"
+  },
   "license": "Apache-2.0",
   "dependencies": {
     "@brightcove/player-loader": "^1.1.0",
     "request": "^2.87.0",
     "request-promise": "^4.2.2",
-    "videojs-standard": "^6.0.4",
     "webpack": "^4.16.2"
   },
   "devDependencies": {
+    "videojs-standard": "^6.0.4",
     "conventional-changelog-cli": "^2.0.1",
     "conventional-changelog-videojs": "^3.0.0",
     "http-server": "^0.11.1",

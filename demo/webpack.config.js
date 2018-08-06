@@ -2,17 +2,16 @@
 const path = require('path');
 const PlayerLoader = require('../src/index.js');
 
-let accountId = '';
-
-if (process.argv[5]) {
-  accountId = process.argv[5].trim();
-}
+const accountId = process.env.BC_ACCOUNT_ID;
 
 if (!accountId) {
-  console.error('Please pass a valid accountId to this command. ex: `npm run demo -- 123456789`');
+  console.error('You must set a valid `BC_ACCOUNT_ID` environment variable!');
   console.error();
   process.exit(1);
 }
+
+const playerId = process.env.BC_PLAYER_ID || 'default';
+const embedId = process.env.BC_EMBED_ID || 'default';
 
 module.exports = {
   entry: path.resolve(__dirname, 'index.js'),
@@ -22,6 +21,6 @@ module.exports = {
   },
   mode: 'development',
   plugins: [
-    new PlayerLoader({accountId})
+    new PlayerLoader({accountId, embedId, playerId})
   ]
 };

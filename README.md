@@ -1,35 +1,150 @@
 # player-loader-webpack-plugin
+The official webpack plugin for the Brightcove Player.
 
 ## Installation
-To install just use
+To install, use:
 
 ```sh
-npm i -D @brightcove/player-loader-webpack-plugin
+npm install --save-dev @brightcove/player-loader-webpack-plugin
 ```
 
-
-## Using the plugin
-
-First require the plugin at the top of your `webpack.config.js`:
+## Basic Usage
+First, require the plugin at the top of your `webpack.config.js`:
 
 ```js
 const PlayerLoader = require('@brightcove/player-loader-webpack-plugin');
 ```
 
-Then create an instance of the `PlayerLoader` plugin in the `plugins` array of your `webpack.config.js`:
+Then create an instance of the `PlayerLoader` plugin in the `plugins` array:
 
-> Note: That `accountId` is a required option!
+> **Note:** `accountId` is a required parameter!
 
 ```js
-  plugins: [
-    new PlayerLoader({accountId: '12345678910'})
-  ],
+plugins: [
+  new PlayerLoader({accountId: '12345678910'})
+]
 ```
 
-For more information on options see the options section of the README.
+For a full list of options, see the [Options section](#options) below.
+
+## How it Works
+This webpack plugin will prepend your Brightcove Player to your bundle. Doing this can reduce the number of requests needed by your website and ensure that the global `bc` function is available synchronously.
+
+### Limitations
+There are several limitations and caveats to using this plugin.
+
+1. iframe embeds are not supported. This plugin is only suitable for use with in-page/advanced embeds.
+1. If your player is updated or republished, the bundle will need to be re-generated before the bundled player is updated.
+
+As an alternative, users who want an iframe embed or want to load their player script asynchronously can use the [@brightcove/player-loader](https://github.com/brightcove/player-loader) project instead, which downloads players at runtime rather than at build time. It does not have these limitations.
+
+### Auto Setup
+When your bundle executes, the Player will automatically set up any embed elements that match certain criteria:
+
+1. Must be either a `<video>` or `<video-js>` element.
+1. Must have a `data-player` attribute that is equivalent to the `playerId` of the bundled player.
+1. Must have a `data-embed` attribute that is equivalent to the `embedId` of the bundled player.
+
+For example, if this project is used with the following configuration:
+
+```js
+plugins: [
+  new PlayerLoader({
+    accountId: '12345678910',
+    playerId: 'abc123xyz',
+    embedId: 'default'
+  })
+]
+```
+
+The following embed elements will be _automatically initialized_ when the bundle executes:
+
+```html
+<video-js
+  data-player="abc123xyz" 
+  data-embed="default">
+</video-js>
+
+<video
+  data-player="abc123xyz" 
+  data-embed="default">
+</video>
+```
+
+This behavior is implicit to the Brightcove Player, not this plugin.
+
+### Manual Setup via `bc` Function
+Any embeds that cannot be auto set up will need to be manually set up using the global `bc` function (or `window.bc`).
+
+This function is created by all Brightcove Players. Its signature matches [the `videojs` function](https://docs.brightcove.com/brightcove-player/current-release/module-videojs.html#~videojs) - please refer to that documentation for a complete description.
+
+At a minimum, the `bc` function takes an element or `id` attribute value. And, just like `videojs`, the `bc` function returns [a Video.js Player instance](https://docs.brightcove.com/brightcove-player/current-release/Player.html):
+
+```js
+const player = bc(document.querySelector('video-js'));
+```
+
+### Setting a Source
+Most Video Cloud users configure sources either in the Studio application or [via programmatic methods](https://support.brightcove.com/assigning-video-player-programmatically). However, using the Video.js `src` method works as well:
+
+```js
+player.src({src: 'https://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4'});
+```
+
+## Putting it All Together
+This is a complete example for using this webpack plugin, which will bundle an imaginary Brightcove Player and set it up manually (as described above). It may also be beneficial to try the included demo project.
+
+First, set up the `webpack.config.js` properly:
+
+```js
+const PlayerLoader = require('@brightcove/player-loader-webpack-plugin');
+
+module.exports = {
+
+  // Additional configuration for entry, output, etc.
+
+  plugins: [
+    new PlayerLoader({accountId: '12345678910'})
+  ]
+};
+```
+
+Second, in the JavaScript source (somewhere in the webpack entry point or in an imported path):
+
+```js
+// Because the player is prepended to the bundle, the global `bc` function
+// will be available immediately.
+//
+// Note that if your bundle needs to be executed in a Node.js environment 
+// instead of just the browser, we advise using the something like the
+// `global` package on npm.
+const bc = window.bc;
+
+// Create a video-js element (or find one in the DOM).
+const playerEl = document.createElement('video-js');
+
+// Append it to the body.
+document.body.appendChild(playerEl);
+
+// Make that element into a Brightcove Player.
+const player = bc(playerEl);
+
+// At this point, the player is created. A source can be set or any other 
+// integration can be written.
+player.src({src: 'https://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4'});
+```
+
+## Running the Demo Project
+This project's Git repository comes with a working demo project.
+
+1. Clone the repo: `git clone https://github.com/brightcove/player-loader-webpack-plugin`
+1. Move into the directory: `cd player-loader-webpack-plugin`
+1. Install dependencies: `npm i`
+1. Set environment variables that will configure the demo. At a minimum, `BC_ACCOUNT_ID`: `export BC_ACCOUNT_ID="1234567890"` (`BC_PLAYER_ID` and `BC_EMBED_ID` are also supported).
+1. Run the demo: `npm run demo`
+1. If everything succeeds, wait for the web server to start then open `http://localhost:9999/` in the browser.
 
 ## Options
-
 ### `accountId`
 * **REQUIRED**
 * *Type:* `string` | `number`
@@ -48,92 +163,7 @@ The Brightcove Player [embed ID](https://support.brightcove.com/guide-embed-apis
 
 A Brightcove Player ID.
 
-## How does it work
-This plugin prepends a brightcove player to the front of your bundle. This will export a `bc` function on the `global` object, usually `window` in the browser. It will also look auto-setup player on the page if they meet certain critrea.
-
-### auto-setup
-
-Any `video` and `video-js` elements on the page and they will be intialized if:
-
-1. They have a `data-player` attribute that is equivelent to the `playerId` of the player you downloaded.
-2. They have a `data-embed` attribute that has an equivelent value to the `embedId` of the player you downloaded.
-
-an example for a player whose `playerId` is `1`, and `embedId` is `2`:
-
-`<video-js data-player=1 data-embed=2></video-js>`
-`<video data-player=1 data-embed=2></video>`
-
-### The bc function
-The API for the `bc` function follows:
-
-`var player = bc(elemOrId, options, readyCallback)`
-
-#### Arguments
-##### `elemOrId`
-**REQUIRED**
-
-*Type:* `string` | `Element`
-
-A video element or the id of a video element. For more information on attributes that the video element can have see: https://support.brightcove.com/choosing-correct-embed-code
-
-##### `options`
-**OPTIONAL**
-*Type:* `Object`
-
-Options to set when creating the player. See the [videojs](https://docs.videojs.com/tutorial-options.html) options guide for specifics.
-
-##### `readyCallback`
-**OPTIONAL**
-*Type:* `Function`
-
-A function that should be called when the player that is about to be created is [`ready`](https://docs.videojs.com/tutorial-setup.html#player-readiness).
-
-#### The return value
-The return value is an instance of a `videojs` [`Player`](https://docs.videojs.com/Player.html) with lots of functionality added on for brightcove customers. This will include customizations made in the studio.
-
-### Setting a source
-If the player you bundled is configured in studio, or the video element you intialized had a source then the player should be ready to go. If your player does not have a source you can add one using `player.src({src: 'some-url.mp4', type: 'video/mp4'})`.
-
-### Putting it all (Example)
-1. Setup the plugin with webpack for the player that you want.
-2. Make sure there are no video elements that will auto-setup on the html page you are going to test with, unless you want that. See the auto-setup section for more info on that.
-3. Setup the player in your webpack entry point (or anywhere really)
-
-```js
-// get the bc function which will be on window at this point
-// Note that if you need your code to support node you will
-// want to use something like the `global` package on npm
-// to "import" window for nodejs.
-const bc = window.bc;
-
-// create a video element
-const videoElement = document.createElement('video');
-
-// add it to the body of the page
-document.body.appendChild(videoElement);
-
-// make that video element into brightcove player
-const player = bc(videoElement);
-
-// set the source for that video
-// or do basically anything you want here
-
-player.src({src: 'some-url.mp4', type: 'video/mp4'});
-
-```
-
-
 ## More Resources
 * [Brightcove Guides](https://support.brightcove.com/getting-started-brightcove-player)
-* [API docs](https://docs.brightcove.com/brightcove-player/current-release/index.html)
+* [API Docs](https://docs.brightcove.com/brightcove-player/current-release/index.html)
 * [Video.js Guides](https://docs.videojs.com/tutorial-videojs_.html)
-
-## Running the demo
-To run the demo, do the following
-1. Clone the repo: `git clone https://github.com/brightcove/player-loader-webpack-plugin`
-2. Move into the directory: `cd player-loader-webpack-plugin`
-3. Install dependencies: `npm i`
-4. Run the demo: `npm run demo -- ACCOUNT_ID` where `ACCOUNT_ID` is a valid account id: `123456789`
-5. If everything succeeds, wait for the web server to start then
-6. Open `http://localhost:9999` in the browser to view the demo
-

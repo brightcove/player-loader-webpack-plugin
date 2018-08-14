@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Video.js Sandbox</title>
-
-  <!-- Load the source files -->
-
+  <title>player-loader-webpack-plugin Demo</title>
+  <style type="text/css">
+    .video-js {
+      width: 900px;
+      height: 504px;
+    }
+  </style>
 </head>
 <body>
-  <video id="vid1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264"
-      poster="http://vjs.zencdn.net/v/oceans.png"
-      data-setup='{}'>
-    <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
-    <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
-    <source src="http://vjs.zencdn.net/v/oceans.ogv" type="video/ogg">
-  </video>
-
+  <h1>player-loader-webpack-plugin Demo</h1>
+  <!--
+    data-player and data-embed are left off this player so that it is not
+    auto set up
+  -->
+  <video class="video-js" controls></video>
   <script src="./dist.js"></script>
-
 </body>
 </html>

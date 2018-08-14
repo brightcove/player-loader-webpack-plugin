@@ -22,7 +22,6 @@ class PlayerLoaderPlugin {
     const url = PlayerLoader.getUrl(settings);
 
     this.playerPromise = request.get(url).catch(function(err) {
-
       console.error('Failed to get a player at ' + url + ' double check your options');
       console.error(err);
       console.error();
@@ -40,7 +39,6 @@ class PlayerLoaderPlugin {
         });
         callback();
       });
-
     });
   }
 }

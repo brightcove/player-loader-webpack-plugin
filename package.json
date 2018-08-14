@@ -1,6 +1,6 @@
 {
   "name": "@brightcove/player-loader-webpack-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The official webpack plugin for the Brightcove Player.",
   "main": "src/index.js",
   "scripts": {
@@ -22,7 +22,9 @@
     "player"
   ],
   "vjsstandard": {
-    "ignore": ["demo/**"]
+    "ignore": [
+      "demo/**"
+    ]
   },
   "author": "Brightcove, Inc.",
   "license": "Apache-2.0",

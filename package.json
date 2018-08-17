@@ -2,6 +2,7 @@
   "name": "@brightcove/player-loader-webpack-plugin",
   "version": "1.0.1",
   "description": "The official webpack plugin for the Brightcove Player.",
+  "repository": "github:brightcove/player-loader-webpack-plugin",
   "main": "src/index.js",
   "scripts": {
     "version": "node scripts/version.js",
@@ -29,18 +30,19 @@
   "author": "Brightcove, Inc.",
   "license": "Apache-2.0",
   "dependencies": {
-    "@brightcove/player-loader": "^1.1.0",
+    "@brightcove/player-url": "^1.1.1",
     "request": "^2.87.0",
     "request-promise": "^4.2.2",
     "webpack": "^4.16.2"
   },
   "devDependencies": {
-    "videojs-standard": "^6.0.4",
     "conventional-changelog-cli": "^2.0.1",
     "conventional-changelog-videojs": "^3.0.0",
+    "global": "^4.3.2",
     "http-server": "^0.11.1",
     "husky": "^0.14.3",
     "semver": "^5.5.0",
+    "videojs-standard": "^6.0.4",
     "webpack-cli": "^3.1.0"
   }
 }

@@ -5,26 +5,28 @@
   "repository": "github:brightcove/player-loader-webpack-plugin",
   "main": "src/index.js",
   "scripts": {
-    "version": "node scripts/version.js",
-    "lint": "vjsstandard",
     "predemo": "rm -f ./demo/dist.js",
     "demo": "webpack --config ./demo/webpack.config.js",
-    "postdemo": "npm run demoserver",
-    "demoserver": "http-server demo -p 9999",
-    "preversion": "npm run lint",
-    "prepush": "npm run lint"
+    "postdemo": "npm run start",
+    "docs": "npm-run-all docs:*",
+    "docs:toc": "doctoc README.md",
+    "lint": "vjsstandard",
+    "start": "http-server demo -p 9999",
+    "update-changelog": "conventional-changelog -p videojs -i CHANGELOG.md -s",
+    "version": "is-prerelease || npm run update-changelog && git add CHANGELOG.md",
+    "prepublish": "not-in-install && npm run build && pkg-ok || in-install",
+    "postinstall": "shx test -d .git && npm-merge-driver install || in-install"
   },
   "keywords": [
-    "webpack",
-    "plugin",
     "brightcove",
-    "videojs",
+    "player",
+    "plugin",
     "video",
-    "player"
+    "webpack"
   ],
   "vjsstandard": {
     "ignore": [
-      "demo/**"
+      "demo/dist.js"
     ]
   },
   "author": "Brightcove, Inc.",
@@ -38,11 +40,49 @@
   "devDependencies": {
     "conventional-changelog-cli": "^2.0.1",
     "conventional-changelog-videojs": "^3.0.0",
+    "doctoc": "^1.3.1",
     "global": "^4.3.2",
     "http-server": "^0.11.1",
-    "husky": "^0.14.3",
-    "semver": "^5.5.0",
-    "videojs-standard": "^6.0.4",
+    "husky": "^1.0.0-rc.13",
+    "in-publish": "^2.0.0",
+    "lint-staged": "^7.2.2",
+    "not-prerelease": "^1.0.1",
+    "npm-merge-driver": "^2.3.5",
+    "npm-run-all": "^4.1.3",
+    "pkg-ok": "^2.2.0",
+    "shx": "^0.3.2",
+    "videojs-standard": "^7.0.1",
     "webpack-cli": "^3.1.0"
+  },
+  "generator-videojs-plugin": {
+    "version": "7.2.0"
+  },
+  "browserslist": [
+    "defaults",
+    "ie 11"
+  ],
+  "files": [
+    "CONTRIBUTING.md",
+    "dist/",
+    "docs/",
+    "index.html",
+    "scripts/",
+    "src/",
+    "test/"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "vjsstandard --fix",
+      "git add"
+    ],
+    "README.md": [
+      "npm run docs:toc",
+      "git add"
+    ]
   }
 }

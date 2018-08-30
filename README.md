@@ -1,6 +1,27 @@
 # player-loader-webpack-plugin
 The official webpack plugin for the Brightcove Player.
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Installation](#installation)
+- [Basic Usage](#basic-usage)
+- [How it Works](#how-it-works)
+  - [Limitations](#limitations)
+  - [Auto Setup](#auto-setup)
+  - [Manual Setup via `bc` Function](#manual-setup-via-bc-function)
+  - [Setting a Source](#setting-a-source)
+- [Putting it All Together](#putting-it-all-together)
+- [Running the Demo Project](#running-the-demo-project)
+- [Options](#options)
+  - [`accountId`](#accountid)
+  - [`embedId`](#embedid)
+  - [`playerId`](#playerid)
+- [More Resources](#more-resources)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Installation
 To install, use:
 

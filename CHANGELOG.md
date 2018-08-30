@@ -1,3 +1,10 @@
+<a name="1.0.3"></a>
+## [1.0.3](https://github.com/brightcove/player-loader-webpack-plugin/compare/v1.0.2...v1.0.3) (2018-08-30)
+
+### Chores
+
+* Update tooling using plugin generator v7.2.0 (#5) ([a268e71](https://github.com/brightcove/player-loader-webpack-plugin/commit/a268e71)), closes [#5](https://github.com/brightcove/player-loader-webpack-plugin/issues/5)
+
 <a name="1.0.2"></a>
 ## [1.0.2](https://github.com/brightcove/player-loader-webpack-plugin/compare/v1.0.1...v1.0.2) (2018-08-17)
 

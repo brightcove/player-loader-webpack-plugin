@@ -14,7 +14,7 @@
     "start": "http-server demo -p 9999",
     "update-changelog": "conventional-changelog -p videojs -i CHANGELOG.md -s",
     "version": "is-prerelease || npm run update-changelog && git add CHANGELOG.md",
-    "prepublish": "not-in-install && npm run build && pkg-ok || in-install",
+    "prepublish": "not-in-install && pkg-ok || in-install",
     "postinstall": "shx test -d .git && npm-merge-driver install || in-install"
   },
   "keywords": [

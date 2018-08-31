@@ -1,4 +1,11 @@
 # player-loader-webpack-plugin
+
+[![Build Status](https://travis-ci.org/brightcove/player-loader-webpack-plugin.svg?branch=master)](https://travis-ci.org/brightcove/player-loader-webpack-plugin)
+[![Greenkeeper badge](https://badges.greenkeeper.io/brightcove/player-loader-webpack-plugin.svg)](https://greenkeeper.io/)
+[![Slack Status](http://slack.videojs.com/badge.svg)](http://slack.videojs.com)
+
+[![NPM](https://nodei.co/npm/@brightcove/player-loader-webpack-plugin.png?downloads=true&downloadRank=true)](https://nodei.co/npm/@brightcove/player-loader-webpack-plugin/)
+
 The official webpack plugin for the Brightcove Player.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -82,12 +89,12 @@ The following embed elements will be _automatically initialized_ when the bundle
 
 ```html
 <video-js
-  data-player="abc123xyz" 
+  data-player="abc123xyz"
   data-embed="default">
 </video-js>
 
 <video
-  data-player="abc123xyz" 
+  data-player="abc123xyz"
   data-embed="default">
 </video>
 ```
@@ -136,7 +143,7 @@ Second, in the JavaScript source (somewhere in the webpack entry point or in an 
 // Because the player is prepended to the bundle, the global `bc` function
 // will be available immediately.
 //
-// Note that if your bundle needs to be executed in a Node.js environment 
+// Note that if your bundle needs to be executed in a Node.js environment
 // instead of just the browser, we advise using the something like the
 // `global` package on npm.
 const bc = window.bc;
@@ -150,7 +157,7 @@ document.body.appendChild(playerEl);
 // Make that element into a Brightcove Player.
 const player = bc(playerEl);
 
-// At this point, the player is created. A source can be set or any other 
+// At this point, the player is created. A source can be set or any other
 // integration can be written.
 player.src({src: 'https://vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4'});
 ```

@@ -1,6 +1,6 @@
 {
   "name": "@brightcove/player-loader-webpack-plugin",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "The official webpack plugin for the Brightcove Player.",
   "repository": "github:brightcove/player-loader-webpack-plugin",
   "main": "src/index.js",

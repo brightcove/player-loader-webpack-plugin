@@ -1,3 +1,10 @@
+<a name="1.0.5"></a>
+## [1.0.5](https://github.com/brightcove/player-loader-webpack-plugin/compare/v1.0.4...v1.0.5) (2018-09-05)
+
+### Bug Fixes
+
+* Remove the postinstall script to prevent install issues (#7) ([3f3806b](https://github.com/brightcove/player-loader-webpack-plugin/commit/3f3806b)), closes [#7](https://github.com/brightcove/player-loader-webpack-plugin/issues/7)
+
 <a name="1.0.4"></a>
 ## [1.0.4](https://github.com/brightcove/player-loader-webpack-plugin/compare/v1.0.3...v1.0.4) (2018-08-30)
 

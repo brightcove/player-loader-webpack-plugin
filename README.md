@@ -2,7 +2,6 @@
 
 [![Build Status](https://travis-ci.org/brightcove/player-loader-webpack-plugin.svg?branch=master)](https://travis-ci.org/brightcove/player-loader-webpack-plugin)
 [![Greenkeeper badge](https://badges.greenkeeper.io/brightcove/player-loader-webpack-plugin.svg)](https://greenkeeper.io/)
-[![Slack Status](http://slack.videojs.com/badge.svg)](http://slack.videojs.com)
 
 [![NPM](https://nodei.co/npm/@brightcove/player-loader-webpack-plugin.png?downloads=true&downloadRank=true)](https://nodei.co/npm/@brightcove/player-loader-webpack-plugin/)
 

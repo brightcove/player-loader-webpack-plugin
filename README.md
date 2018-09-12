@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/brightcove/player-loader-webpack-plugin.svg?branch=master)](https://travis-ci.org/brightcove/player-loader-webpack-plugin)
 [![Greenkeeper badge](https://badges.greenkeeper.io/brightcove/player-loader-webpack-plugin.svg)](https://greenkeeper.io/)
 
-[![NPM](https://nodei.co/npm/@brightcove/player-loader-webpack-plugin.png?downloads=true&downloadRank=true)](https://nodei.co/npm/@brightcove/player-loader-webpack-plugin/)
+[![NPM](https://nodeico.herokuapp.com/@brightcove/player-loader-webpack-plugin.svg)](https://npmjs.com/package/@brightcove/player-loader-webpack-plugin)
 
 The official webpack plugin for the Brightcove Player.
 

@@ -20,25 +20,21 @@ class PlayerLoaderPlugin {
       process.exit(1);
     }
 
-    const url = brightcovePlayerUrl({accountId, embedId, playerId});
-
-    this.playerPromise = request.get(url).catch(function(err) {
-      console.error('Failed to get a player at ' + url + ' double check your options');
-      console.error(err);
-      console.error();
-      process.exit(1);
-    });
+    this.playerUrl = brightcovePlayerUrl({accountId, embedId, playerId});
   }
 
   apply(compiler) {
     compiler.hooks.emit.tapAsync('PlayerLoaderPlugin', (compilation, callback) => {
-      this.playerPromise.then((playerjs) => {
+      request.get(this.playerUrl).then((playerjs) => {
         Object.keys(compilation.assets).forEach(function(file) {
-          compilation.assets[file] = new ConcatSource(
-            playerjs, compilation.assets[file]
-          );
+          compilation.assets[file] = new ConcatSource(playerjs, compilation.assets[file]);
         });
         callback();
+      }).catch(function(err) {
+        console.error('Failed to get a player at ' + this.playerUrl + ' double check your options');
+        console.error(err);
+        console.error();
+        process.exit(1);
       });
     });
   }

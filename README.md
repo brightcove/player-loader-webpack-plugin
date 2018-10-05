@@ -53,6 +53,8 @@ plugins: [
 ]
 ```
 
+> Note: If you have more than one output, we will automatically pick the first output with a .js extension. If you want to control that see the `prependTo` option.
+
 For a full list of options, see the [Options section](#options) below.
 
 ## How it Works

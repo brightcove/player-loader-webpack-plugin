@@ -35,23 +35,29 @@ class PlayerLoaderPlugin {
   apply(compiler) {
     compiler.hooks.emit.tapAsync('PlayerLoaderPlugin', (compilation, callback) => {
       request.get(this.playerUrl).then((playerjs) => {
-        // normally we filter out all non .js outputs
-        let filterFn = (filename) => path.extname(filename) !== '.js';
+        let assets = Object.keys(compilation.assets);
 
-        // if prependTo is specified though, we just filter out anything not listed
-        if (typeof this.settings_.prependTo !== 'undefined') {
-          filterFn = (filename) => this.settings_.prependTo.indexOf(filename) !== -1;
+        // normally we filter out all non .js outputs, and choose prepend to
+        // only the first output
+        if (typeof this.settings_.prependTo === 'undefined') {
+          // filter out non js files
+          assets = assets.filter((filename) => path.extname(filename) === '.js');
+
+          // only prepend to the first one
+          assets = [assets[0]];
+
+        // if prependTo is specified though, we prepend to anything that is listed
+        } else {
+          assets = assets.filter((filename) => this.settings_.prependTo.indexOf(filename) === -1);
         }
 
-        const assets = Object.keys(compilation.assets).filter(filterFn);
-
-        if (assets.length) {
+        if (!assets.length) {
           console.error('webpack-player-loader-plugin: did not find anything to prepend the player to!');
           console.error();
           process.exit(1);
         }
 
-        Object.keys(assets).forEach(function(file) {
+        assets.forEach(function(file) {
           compilation.assets[file] = new ConcatSource(playerjs, compilation.assets[file]);
         });
         callback();

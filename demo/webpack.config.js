@@ -21,6 +21,6 @@ module.exports = {
   },
   mode: 'development',
   plugins: [
-    new PlayerLoader({accountId, embedId, playerId})
+    new PlayerLoader({accountId, embedId, playerId, prependTo: 'demo.js'})
   ]
 };

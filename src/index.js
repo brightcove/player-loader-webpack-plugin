@@ -15,7 +15,7 @@ class PlayerLoaderPlugin {
     this.settings_ = Object.assign({}, defaults, options);
     const {accountId, embedId, playerId} = this.settings_;
 
-    /* if prependTo was passed in, and was a string make it an array */
+    // if prependTo was passed in, and was a string make it an array
     if (typeof this.settings_.prependTo !== 'undefined') {
       if (!Array.isArray(this.settings_.prependTo)) {
         this.settings_.prependTo = [this.settings_.prependTo];

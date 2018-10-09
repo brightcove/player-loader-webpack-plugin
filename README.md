@@ -21,6 +21,7 @@ The official webpack plugin for the Brightcove Player.
 - [Putting it All Together](#putting-it-all-together)
 - [Running the Demo Project](#running-the-demo-project)
 - [Options](#options)
+  - [`prependTo`](#prependto)
   - [`accountId`](#accountid)
   - [`embedId`](#embedid)
   - [`playerId`](#playerid)
@@ -51,6 +52,8 @@ plugins: [
   new PlayerLoader({accountId: '12345678910'})
 ]
 ```
+
+> Note: If you have more than one output, we will automatically pick the first output with a .js extension. If you want to control that see the `prependTo` option.
 
 For a full list of options, see the [Options section](#options) below.
 
@@ -172,6 +175,13 @@ This project's Git repository comes with a working demo project.
 1. If everything succeeds, wait for the web server to start then open `http://localhost:9999/` in the browser.
 
 ## Options
+
+### `prependTo`
+* *Type:* `array|string`
+
+By default we prepend the player to all files with a `.js` extension that are listed as an output. If you only want to prepend to certain files pass an array or string along with the `filename` of the files you want to prepend the player to.
+
+
 ### `accountId`
 * **REQUIRED**
 * *Type:* `string` | `number`

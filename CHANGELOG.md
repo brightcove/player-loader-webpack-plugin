@@ -1,3 +1,11 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/brightcove/player-loader-webpack-plugin/compare/v1.0.5...v1.1.0) (2018-10-09)
+
+### Bug Fixes
+
+* Only prepend the player to the first js (#11) ([55db204](https://github.com/brightcove/player-loader-webpack-plugin/commit/55db204)), closes [#11](https://github.com/brightcove/player-loader-webpack-plugin/issues/11)
+* watch by always re-requesting the player (#12) ([b7fa6a1](https://github.com/brightcove/player-loader-webpack-plugin/commit/b7fa6a1)), closes [#12](https://github.com/brightcove/player-loader-webpack-plugin/issues/12)
+
 <a name="1.0.5"></a>
 ## [1.0.5](https://github.com/brightcove/player-loader-webpack-plugin/compare/v1.0.4...v1.0.5) (2018-09-05)
 

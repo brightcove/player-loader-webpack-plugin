@@ -179,7 +179,7 @@ This project's Git repository comes with a working demo project.
 ### `prependTo`
 * *Type:* `array|string`
 
-By default we prepend the player to all files with a `.js` extension that are listed as an output. If you only want to prepend to certain files pass an array or string along with the `filename` of the files you want to prepend the player to.
+By default we prepend the player to the first file with a `.js` extension that is listed as an output. If you only want to prepend to certain file(s) pass an array or string along with the filename of the files you want to prepend the player to.
 
 
 ### `accountId`

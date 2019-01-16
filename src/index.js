@@ -33,7 +33,17 @@ class PlayerLoaderPlugin {
   }
 
   apply(compiler) {
-    compiler.hooks.emit.tapAsync('PlayerLoaderPlugin', (compilation, callback) => {
+    if (this.settings_.backwardCompatible) {
+      // webpack@3 syntax
+      compiler.plugin('emit', this.downloadAndAppendPlayer.bind(this));
+    } else {
+      // webpack@4 syntax
+      compiler.hooks.emit.tapAsync('PlayerLoaderPlugin', this.downloadAndAppendPlayer.bind(this));
+    }
+  }
+
+  downloadAndAppendPlayer(compilation, callback) {
+      // Keeping the indentation to 4 to avoid unnecessary diff in GitHub
       request.get(this.playerUrl).then((playerjs) => {
         let assets = Object.keys(compilation.assets);
 
@@ -67,7 +77,6 @@ class PlayerLoaderPlugin {
         console.error();
         process.exit(1);
       });
-    });
   }
 }
 

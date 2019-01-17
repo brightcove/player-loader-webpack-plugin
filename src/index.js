@@ -43,40 +43,39 @@ class PlayerLoaderPlugin {
   }
 
   downloadAndAppendPlayer(compilation, callback) {
-      // Keeping the indentation to 4 to avoid unnecessary diff in GitHub
-      request.get(this.playerUrl).then((playerjs) => {
-        let assets = Object.keys(compilation.assets);
+    request.get(this.playerUrl).then((playerjs) => {
+      let assets = Object.keys(compilation.assets);
 
-        // normally we filter out all non .js outputs, and choose prepend to
-        // only the first output
-        if (typeof this.settings_.prependTo === 'undefined') {
-          // filter out non js files
-          assets = assets.filter((filename) => path.extname(filename) === '.js');
+      // normally we filter out all non .js outputs, and choose prepend to
+      // only the first output
+      if (typeof this.settings_.prependTo === 'undefined') {
+        // filter out non js files
+        assets = assets.filter((filename) => path.extname(filename) === '.js');
 
-          // only prepend to the first one
-          assets = [assets[0]];
+        // only prepend to the first one
+        assets = [assets[0]];
 
-        // if prependTo is specified though, we prepend to anything that is listed
-        } else {
-          assets = assets.filter((filename) => this.settings_.prependTo.indexOf(filename) === -1);
-        }
+      // if prependTo is specified though, we prepend to anything that is listed
+      } else {
+        assets = assets.filter((filename) => this.settings_.prependTo.indexOf(filename) === -1);
+      }
 
-        if (!assets.length) {
-          console.error('webpack-player-loader-plugin: did not find anything to prepend the player to!');
-          console.error();
-          process.exit(1);
-        }
-
-        assets.forEach(function(file) {
-          compilation.assets[file] = new ConcatSource(playerjs, compilation.assets[file]);
-        });
-        callback();
-      }).catch(function(err) {
-        console.error('Failed to get a player at ' + this.playerUrl + ' double check your options');
-        console.error(err);
+      if (!assets.length) {
+        console.error('webpack-player-loader-plugin: did not find anything to prepend the player to!');
         console.error();
         process.exit(1);
+      }
+
+      assets.forEach(function(file) {
+        compilation.assets[file] = new ConcatSource(playerjs, compilation.assets[file]);
       });
+      callback();
+    }).catch(function(err) {
+      console.error('Failed to get a player at ' + this.playerUrl + ' double check your options');
+      console.error(err);
+      console.error();
+      process.exit(1);
+    });
   }
 }
 

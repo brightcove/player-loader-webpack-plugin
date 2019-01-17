@@ -57,7 +57,7 @@ class PlayerLoaderPlugin {
 
       // if prependTo is specified though, we prepend to anything that is listed
       } else {
-        assets = assets.filter((filename) => this.settings_.prependTo.indexOf(filename) === -1);
+        assets = assets.filter((filename) => this.settings_.prependTo.indexOf(filename) !== -1);
       }
 
       if (!assets.length) {

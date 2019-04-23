@@ -12,6 +12,7 @@ The official webpack plugin for the Brightcove Player.
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Installation](#installation)
+- [Compatibility](#compatibility)
 - [Basic Usage](#basic-usage)
 - [How it Works](#how-it-works)
   - [Limitations](#limitations)
@@ -35,6 +36,10 @@ To install, use:
 ```sh
 npm install --save-dev @brightcove/player-loader-webpack-plugin
 ```
+
+## Compatibility
+
+This webpack plugin supports webpack 3.x & webpack 4.x
 
 ## Basic Usage
 First, require the plugin at the top of your `webpack.config.js`:

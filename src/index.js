@@ -33,40 +33,48 @@ class PlayerLoaderPlugin {
   }
 
   apply(compiler) {
-    compiler.hooks.emit.tapAsync('PlayerLoaderPlugin', (compilation, callback) => {
-      request.get(this.playerUrl).then((playerjs) => {
-        let assets = Object.keys(compilation.assets);
+    if (compiler.hooks && compiler.hooks.emit) {
+      // webpack@4 syntax
+      compiler.hooks.emit.tapAsync('PlayerLoaderPlugin', this.downloadAndAppendPlayer.bind(this));
+    } else {
+      // webpack@3 syntax
+      compiler.plugin('emit', this.downloadAndAppendPlayer.bind(this));
+    }
+  }
 
-        // normally we filter out all non .js outputs, and choose prepend to
-        // only the first output
-        if (typeof this.settings_.prependTo === 'undefined') {
-          // filter out non js files
-          assets = assets.filter((filename) => path.extname(filename) === '.js');
+  downloadAndAppendPlayer(compilation, callback) {
+    request.get(this.playerUrl).then((playerjs) => {
+      let assets = Object.keys(compilation.assets);
 
-          // only prepend to the first one
-          assets = [assets[0]];
+      // normally we filter out all non .js outputs, and choose prepend to
+      // only the first output
+      if (typeof this.settings_.prependTo === 'undefined') {
+        // filter out non js files
+        assets = assets.filter((filename) => path.extname(filename) === '.js');
 
-        // if prependTo is specified though, we prepend to anything that is listed
-        } else {
-          assets = assets.filter((filename) => this.settings_.prependTo.indexOf(filename) === -1);
-        }
+        // only prepend to the first one
+        assets = [assets[0]];
 
-        if (!assets.length) {
-          console.error('webpack-player-loader-plugin: did not find anything to prepend the player to!');
-          console.error();
-          process.exit(1);
-        }
+      // if prependTo is specified though, we prepend to anything that is listed
+      } else {
+        assets = assets.filter((filename) => this.settings_.prependTo.indexOf(filename) !== -1);
+      }
 
-        assets.forEach(function(file) {
-          compilation.assets[file] = new ConcatSource(playerjs, compilation.assets[file]);
-        });
-        callback();
-      }).catch(function(err) {
-        console.error('Failed to get a player at ' + this.playerUrl + ' double check your options');
-        console.error(err);
+      if (!assets.length) {
+        console.error('webpack-player-loader-plugin: did not find anything to prepend the player to!');
         console.error();
         process.exit(1);
+      }
+
+      assets.forEach(function(file) {
+        compilation.assets[file] = new ConcatSource(playerjs, compilation.assets[file]);
       });
+      callback();
+    }).catch(function(err) {
+      console.error('Failed to get a player at ' + this.playerUrl + ' double check your options');
+      console.error(err);
+      console.error();
+      process.exit(1);
     });
   }
 }

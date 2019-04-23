@@ -33,12 +33,12 @@ class PlayerLoaderPlugin {
   }
 
   apply(compiler) {
-    if (this.settings_.backwardCompatible) {
-      // webpack@3 syntax
-      compiler.plugin('emit', this.downloadAndAppendPlayer.bind(this));
-    } else {
+    if (compiler.hooks && compiler.hooks.emit) {
       // webpack@4 syntax
       compiler.hooks.emit.tapAsync('PlayerLoaderPlugin', this.downloadAndAppendPlayer.bind(this));
+    } else {
+      // webpack@3 syntax
+      compiler.plugin('emit', this.downloadAndAppendPlayer.bind(this));
     }
   }
 

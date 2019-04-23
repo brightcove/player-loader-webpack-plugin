@@ -12,6 +12,7 @@ The official webpack plugin for the Brightcove Player.
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Installation](#installation)
+- [Compatibility](#compatibility)
 - [Basic Usage](#basic-usage)
 - [How it Works](#how-it-works)
   - [Limitations](#limitations)
@@ -21,7 +22,6 @@ The official webpack plugin for the Brightcove Player.
 - [Putting it All Together](#putting-it-all-together)
 - [Running the Demo Project](#running-the-demo-project)
 - [Options](#options)
-  - [`backwardCompatible`](#backwardcompatible)
   - [`prependTo`](#prependto)
   - [`accountId`](#accountid)
   - [`embedId`](#embedid)
@@ -36,6 +36,10 @@ To install, use:
 ```sh
 npm install --save-dev @brightcove/player-loader-webpack-plugin
 ```
+
+## Compatibility
+
+This webpack plugin supports webpack 3.x & webpack 4.x
 
 ## Basic Usage
 First, require the plugin at the top of your `webpack.config.js`:
@@ -176,12 +180,6 @@ This project's Git repository comes with a working demo project.
 1. If everything succeeds, wait for the web server to start then open `http://localhost:9999/` in the browser.
 
 ## Options
-
-### `backwardCompatible`
-* *Type:* `boolean`
-
-By default this plugin works with webpack@4.x but to support webpack@3.x (like for Ionic 3/4), you can pass `backwardCompatible: true` to
- options.
 
 ### `prependTo`
 * *Type:* `array|string`

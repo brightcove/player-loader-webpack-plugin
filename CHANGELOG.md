@@ -1,3 +1,26 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/brightcove/player-loader-webpack-plugin/compare/v1.1.0...v1.2.0) (2019-04-23)
+
+### Features
+
+* Make this plugin backwards compatible with webpack 3 (#16) ([b5617e6](https://github.com/brightcove/player-loader-webpack-plugin/commit/b5617e6)), closes [#16](https://github.com/brightcove/player-loader-webpack-plugin/issues/16)
+
+### Bug Fixes
+
+* issue with introduced by prependTo from #16 ([23c367a](https://github.com/brightcove/player-loader-webpack-plugin/commit/23c367a)), closes [#16](https://github.com/brightcove/player-loader-webpack-plugin/issues/16)
+
+### Chores
+
+* **package:** update videojs-standard to version 8.0.2(#14) ([05472ba](https://github.com/brightcove/player-loader-webpack-plugin/commit/05472ba)), closes [#14](https://github.com/brightcove/player-loader-webpack-plugin/issues/14)
+
+### Documentation
+
+* Update README for prependTo option. (#13) ([8847652](https://github.com/brightcove/player-loader-webpack-plugin/commit/8847652)), closes [#13](https://github.com/brightcove/player-loader-webpack-plugin/issues/13)
+
+### Tests
+
+* Add a script to test the demo on webpack 3 and 4 (#17) ([415861e](https://github.com/brightcove/player-loader-webpack-plugin/commit/415861e)), closes [#17](https://github.com/brightcove/player-loader-webpack-plugin/issues/17)
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/brightcove/player-loader-webpack-plugin/compare/v1.0.5...v1.1.0) (2018-10-09)
 

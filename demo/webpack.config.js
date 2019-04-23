@@ -19,7 +19,6 @@ module.exports = {
     filename: 'dist.js',
     path: path.resolve(__dirname)
   },
-  mode: 'development',
   plugins: [
     new PlayerLoader({accountId, embedId, playerId, prependTo: 'demo.js'})
   ]

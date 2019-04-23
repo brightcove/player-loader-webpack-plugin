@@ -176,7 +176,7 @@ This project's Git repository comes with a working demo project.
 1. Move into the directory: `cd player-loader-webpack-plugin`
 1. Install dependencies: `npm i`
 1. Set environment variables that will configure the demo. At a minimum, `BC_ACCOUNT_ID`: `export BC_ACCOUNT_ID="1234567890"` (`BC_PLAYER_ID` and `BC_EMBED_ID` are also supported).
-1. Run the demo: `npm run demo`
+1. Run the demo: `npm run start` to run the demo and a local server
 1. If everything succeeds, wait for the web server to start then open `http://localhost:9999/` in the browser.
 
 ## Options

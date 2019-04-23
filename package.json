@@ -5,14 +5,15 @@
   "repository": "github:brightcove/player-loader-webpack-plugin",
   "main": "src/index.js",
   "scripts": {
-    "predemo": "rm -f ./demo/dist.js",
+    "clean": "rm -f ./demo/dist.js",
+    "predemo": "npm run clean",
     "demo": "webpack --config ./demo/webpack.config.js",
-    "postdemo": "npm run start",
     "docs": "npm-run-all docs:*",
     "docs:toc": "doctoc README.md",
     "test": "vjsstandard",
     "lint": "vjsstandard",
-    "start": "http-server demo -p 9999",
+    "start": "npm run demo && npm run server",
+    "server": "http-server demo -p 9999",
     "update-changelog": "conventional-changelog -p videojs -i CHANGELOG.md -s",
     "version": "is-prerelease || npm run update-changelog && git add CHANGELOG.md",
     "prepublish": "not-in-install && pkg-ok || in-install"

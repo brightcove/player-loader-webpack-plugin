@@ -20,6 +20,6 @@ module.exports = {
     path: path.resolve(__dirname)
   },
   plugins: [
-    new PlayerLoader({accountId, embedId, playerId, prependTo: 'demo.js'})
+    new PlayerLoader({accountId, embedId, playerId, prependTo: 'dist.js'})
   ]
 };

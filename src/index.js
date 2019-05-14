@@ -56,8 +56,25 @@ class PlayerLoaderPlugin {
         assets = [assets[0]];
 
       // if prependTo is specified though, we prepend to anything that is listed
-      } else {
-        assets = assets.filter((filename) => this.settings_.prependTo.indexOf(filename) === -1);
+      } else if (this.settings_.prependTo.length > 0) {
+        const matches = [];
+
+        assets.forEach((outputFilename) => {
+          this.settings_.prependTo.forEach(filter => {
+            if (filter instanceof RegExp) {
+              // filter is a regex
+              if (filter.test(outputFilename)) {
+                matches.push(outputFilename);
+              }
+            }
+            // filter is a string
+            if (outputFilename.indexOf(filter) > -1) {
+              matches.push(outputFilename);
+            }
+          });
+        });
+
+        assets = matches;
       }
 
       if (!assets.length) {

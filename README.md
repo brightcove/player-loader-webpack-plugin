@@ -182,10 +182,37 @@ This project's Git repository comes with a working demo project.
 ## Options
 
 ### `prependTo`
-* *Type:* `array|string`
+* *Type:* `string` | `regex` | `(regex|string)[]`
 
-By default we prepend the player to the first file with a `.js` extension that is listed as an output. If you only want to prepend to certain file(s) pass an array or string along with the filename of the files you want to prepend the player to.
+By default we prepend the player to the first file with a `.js` extension that is listed as an output.
 
+If you only want to prepend to certain file(s) you may pass a string or regex that will be used to match against webpacks output filenames array. You can optionally pass an array in `prependTo`, and the player will be prepended to any file that matches any item in the array (regex or string).
+
+```js
+// Example of matching files output by webpack when code splitting
+const filenames = ['bundle.js', 'bundle.1.js', 'bundle.2.js', 'playerBundle.js'];
+
+// webpack.config.js
+module.exports = {
+
+  // ... Additional configuration for entry, output, etc.
+
+  plugins: [
+    new PlayerLoader({
+      accountId: '12345678910',
+      // matches bundle.js only
+      // prependTo: 'bundle.js',
+
+      // matches all files starting with bundle
+      // prependTo: /^bundle/,
+
+      // matches both bundle.js and playerBundle.js only
+      // prependTo: [/^bundle\.js/, /^player/],
+    })
+  ]
+};
+
+```
 
 ### `accountId`
 * **REQUIRED**

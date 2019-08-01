@@ -36,7 +36,7 @@
     "@brightcove/player-url": "^1.1.1",
     "request": "^2.87.0",
     "request-promise": "^4.2.2",
-    "webpack": "^4.16.2"
+    "webpack": "^4.39.0"
   },
   "devDependencies": {
     "conventional-changelog-cli": "^2.0.1",

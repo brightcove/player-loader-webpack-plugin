@@ -52,7 +52,7 @@
     "pkg-ok": "^2.2.0",
     "shx": "^0.3.2",
     "videojs-standard": "^8.0.2",
-    "webpack-cli": "^3.1.0",
+    "webpack-cli": "^3.3.7",
     "npm-merge-driver-install": "^1.0.0"
   },
   "generator-videojs-plugin": {
